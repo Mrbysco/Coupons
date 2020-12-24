@@ -43,26 +43,32 @@ public class CouponConfig {
 
             enableBrewingCoupon = builder
                     .comment("Defines whether or not the Brewing Coupon is obtainable from the Wandering Trader")
+                    .worldRestart()
                     .define("enableBrewingCoupon", true);
 
             enableCraftingCoupon = builder
                     .comment("Defines whether or not the Crafting Coupon is obtainable from the Wandering Trader")
+                    .worldRestart()
                     .define("enableCraftingCoupon", true);
 
             enableExperienceCoupon = builder
                     .comment("Defines whether or not the Experience Coupon is obtainable from the Wandering Trader")
+                    .worldRestart()
                     .define("enableExperienceCoupon", true);
 
             enableFurnaceCoupon = builder
                     .comment("Defines whether or not the Furnace Coupon is obtainable from the Wandering Trader")
+                    .worldRestart()
                     .define("enableFurnaceCoupon", true);
 
             enableLootCoupon = builder
                     .comment("Defines whether or not the Loot Coupon is obtainable from the Wandering Trader")
+                    .worldRestart()
                     .define("enableLootCoupon", true);
 
             enableTradingCoupon = builder
                     .comment("Defines whether or not the Trading Coupon is obtainable from the Wandering Trader")
+                    .worldRestart()
                     .define("enableTradingCoupon", true);
 
             builder.pop();
