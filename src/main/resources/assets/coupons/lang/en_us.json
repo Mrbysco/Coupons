@@ -1,0 +1,20 @@
+{
+  "_comment": "Creative Tab Name",
+  "itemGroup.coupons.couponGroup": "Coupons Tab",
+
+  "_comment": "Item names",
+  "item.coupons.crafting_coupon": "Crafting Coupon",
+  "item.coupons.furnace_coupon": "Furnace Coupon",
+  "item.coupons.trading_coupon": "Trading Coupon",
+  "item.coupons.brewing_coupon": "Brewing Coupon",
+  "item.coupons.loot_coupon": "Loot Coupon",
+  "item.coupons.experience_coupon": "Experience Coupon",
+
+  "_comment": "description",
+  "coupons:crafting_coupon_text": "Craft an item get an ingredient back",
+  "coupons:furnace_coupon_text": "Smelt one item for FREE",
+  "coupons:trading_coupon_text": "Get a nice deal while trading",
+  "coupons:brewing_coupon_text": "Use one less water bottle while brewing",
+  "coupons:loot_coupon_text": "Double the loot of the mob you apply this coupon on",
+  "coupons:experience_coupon_text": "Get one free level of experience"
+}

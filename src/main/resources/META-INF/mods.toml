@@ -1,0 +1,14 @@
+modLoader="javafml"
+loaderVersion="[34,)"
+issueTrackerURL="https://github.com/mrbysco/Coupons/issues"
+license="MIT"
+
+[[mods]]
+modId="coupons"
+version="${file.jarVersion}"
+displayName="Coupons"
+displayURL="https://minecraft.curseforge.com/projects/coupons"
+authors="ShyNieke, Mrbysco"
+description='''
+You get discount and you get discount. EVERYBODY GETS DISCOUNT!
+'''
