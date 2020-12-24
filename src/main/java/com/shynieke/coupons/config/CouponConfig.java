@@ -16,9 +16,16 @@ public class CouponConfig {
         public final BooleanValue doubleBossLoot;
         public final ConfigValue<List<? extends String>> entityBlacklist;
 
+        public final BooleanValue enableBrewingCoupon;
+        public final BooleanValue enableCraftingCoupon;
+        public final BooleanValue enableExperienceCoupon;
+        public final BooleanValue enableFurnaceCoupon;
+        public final BooleanValue enableLootCoupon;
+        public final BooleanValue enableTradingCoupon;
+
         Common(ForgeConfigSpec.Builder builder) {
-            builder.comment("Server settings")
-                    .push("Server");
+            builder.comment("General settings")
+                    .push("General");
 
             doubleBossLoot = builder
                     .comment("When enabled the loot coupon can double boss loot")
@@ -29,6 +36,34 @@ public class CouponConfig {
             entityBlacklist = builder
                     .comment("A list of entities that can't have loot doubled [Syntax: 'minecraft:bat']")
                     .defineList("entityBlacklist", Arrays.asList(entities), o -> (o instanceof String));
+
+            builder.pop();
+            builder.comment("Wandering Trader Trades")
+                    .push("Trades");
+
+            enableBrewingCoupon = builder
+                    .comment("Defines whether or not the Brewing Coupon is obtainable from the Wandering Trader")
+                    .define("enableBrewingCoupon", true);
+
+            enableCraftingCoupon = builder
+                    .comment("Defines whether or not the Crafting Coupon is obtainable from the Wandering Trader")
+                    .define("enableCraftingCoupon", true);
+
+            enableExperienceCoupon = builder
+                    .comment("Defines whether or not the Experience Coupon is obtainable from the Wandering Trader")
+                    .define("enableExperienceCoupon", true);
+
+            enableFurnaceCoupon = builder
+                    .comment("Defines whether or not the Furnace Coupon is obtainable from the Wandering Trader")
+                    .define("enableFurnaceCoupon", true);
+
+            enableLootCoupon = builder
+                    .comment("Defines whether or not the Loot Coupon is obtainable from the Wandering Trader")
+                    .define("enableLootCoupon", true);
+
+            enableTradingCoupon = builder
+                    .comment("Defines whether or not the Trading Coupon is obtainable from the Wandering Trader")
+                    .define("enableTradingCoupon", true);
 
             builder.pop();
         }

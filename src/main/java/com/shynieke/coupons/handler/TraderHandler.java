@@ -1,6 +1,7 @@
 package com.shynieke.coupons.handler;
 
 import com.shynieke.coupons.CouponRegistry;
+import com.shynieke.coupons.config.CouponConfig;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.merchant.villager.VillagerTrades.ITrade;
@@ -19,12 +20,24 @@ public class TraderHandler {
 
     @SubscribeEvent
     public void onWandererTradesEvent(WandererTradesEvent event) {
-        event.getGenericTrades().add(new TraderHandler.ItemsForEmeraldsTrade(CouponRegistry.BREWING_COUPON.get(), getRandInRange(1, 8), getRandInRange(10, 28), getRandInRange(1, 12), 5));
-        event.getGenericTrades().add(new TraderHandler.ItemsForEmeraldsTrade(CouponRegistry.CRAFTING_COUPON.get(), getRandInRange(1, 8), getRandInRange(10, 28), getRandInRange(1, 12), 5));
-        event.getGenericTrades().add(new TraderHandler.ItemsForEmeraldsTrade(CouponRegistry.EXPERIENCE_COUPON.get(), getRandInRange(1, 8), getRandInRange(10, 28), getRandInRange(1, 12), 5));
-        event.getGenericTrades().add(new TraderHandler.ItemsForEmeraldsTrade(CouponRegistry.FURNACE_COUPON.get(), getRandInRange(1, 8), getRandInRange(10, 28), getRandInRange(1, 12), 5));
-        event.getGenericTrades().add(new TraderHandler.ItemsForEmeraldsTrade(CouponRegistry.LOOT_COUPON.get(), getRandInRange(1, 8), getRandInRange(10, 28), getRandInRange(1, 12), 5));
-        event.getGenericTrades().add(new TraderHandler.ItemsForEmeraldsTrade(CouponRegistry.TRADING_COUPON.get(), getRandInRange(1, 8), getRandInRange(10, 28), getRandInRange(1, 12), 5));
+        if(CouponConfig.COMMON.enableBrewingCoupon.get()) {
+            event.getGenericTrades().add(new TraderHandler.ItemsForEmeraldsTrade(CouponRegistry.BREWING_COUPON.get(), getRandInRange(1, 8), getRandInRange(10, 28), getRandInRange(1, 12), 5));
+        }
+        if(CouponConfig.COMMON.enableCraftingCoupon.get()) {
+            event.getGenericTrades().add(new TraderHandler.ItemsForEmeraldsTrade(CouponRegistry.CRAFTING_COUPON.get(), getRandInRange(1, 8), getRandInRange(10, 28), getRandInRange(1, 12), 5));
+        }
+        if(CouponConfig.COMMON.enableExperienceCoupon.get()) {
+            event.getGenericTrades().add(new TraderHandler.ItemsForEmeraldsTrade(CouponRegistry.EXPERIENCE_COUPON.get(), getRandInRange(1, 8), getRandInRange(10, 28), getRandInRange(1, 12), 5));
+        }
+        if(CouponConfig.COMMON.enableFurnaceCoupon.get()) {
+            event.getGenericTrades().add(new TraderHandler.ItemsForEmeraldsTrade(CouponRegistry.FURNACE_COUPON.get(), getRandInRange(1, 8), getRandInRange(10, 28), getRandInRange(1, 12), 5));
+        }
+        if(CouponConfig.COMMON.enableLootCoupon.get()) {
+            event.getGenericTrades().add(new TraderHandler.ItemsForEmeraldsTrade(CouponRegistry.LOOT_COUPON.get(), getRandInRange(1, 8), getRandInRange(10, 28), getRandInRange(1, 12), 5));
+        }
+        if(CouponConfig.COMMON.enableTradingCoupon.get()) {
+            event.getGenericTrades().add(new TraderHandler.ItemsForEmeraldsTrade(CouponRegistry.TRADING_COUPON.get(), getRandInRange(1, 8), getRandInRange(10, 28), getRandInRange(1, 12), 5));
+        }
     }
 
     public int getRandInRange(int min, int max) {
