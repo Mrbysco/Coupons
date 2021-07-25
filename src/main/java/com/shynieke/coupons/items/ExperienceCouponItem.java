@@ -22,33 +22,33 @@ public class ExperienceCouponItem extends CouponItem {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack stack = playerIn.getHeldItem(handIn);
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        ItemStack stack = playerIn.getItemInHand(handIn);
 
-        if (!worldIn.isRemote()) {
-            boolean creative = playerIn.abilities.isCreativeMode;
+        if (!worldIn.isClientSide()) {
+            boolean creative = playerIn.abilities.instabuild;
             if (playerIn.isCrouching()) {
-                playerIn.addExperienceLevel(stack.getCount());
+                playerIn.giveExperienceLevels(stack.getCount());
                 if(!creative)
                     stack.shrink(stack.getCount());
             } else {
-                playerIn.addExperienceLevel(1);
+                playerIn.giveExperienceLevels(1);
                 if(!creative)
                     stack.shrink(1);
             }
         }
 
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        return super.use(worldIn, playerIn, handIn);
     }
 
     @Override
-    public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
-        return super.itemInteractionForEntity(stack, playerIn, target, hand);
+    public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
+        return super.interactLivingEntity(stack, playerIn, target, hand);
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent(CouponReference.MOD_ID + ":experience_coupon_text").mergeStyle(TextFormatting.GOLD));
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(new TranslationTextComponent(CouponReference.MOD_ID + ":experience_coupon_text").withStyle(TextFormatting.GOLD));
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 }

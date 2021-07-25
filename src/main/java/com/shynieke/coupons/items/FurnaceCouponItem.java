@@ -22,8 +22,8 @@ public class FurnaceCouponItem extends CouponItem {
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent(CouponReference.MOD_ID + ":furnace_coupon_text").mergeStyle(TextFormatting.GOLD));
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(new TranslationTextComponent(CouponReference.MOD_ID + ":furnace_coupon_text").withStyle(TextFormatting.GOLD));
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 }

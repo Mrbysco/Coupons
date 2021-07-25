@@ -38,18 +38,18 @@ public class CouponHandler {
                 InventoryCheck.hasCoupon(player, CouponRegistry.CRAFTING_COUPON)) {
             IInventory inventory = event.getInventory();
             ItemStack refundStack = ItemStack.EMPTY;
-            for(int i = 0; i < inventory.getSizeInventory(); i++) {
-                ItemStack foundStack = inventory.getStackInSlot(i);
-                if(!foundStack.isEmpty() && !foundStack.isDamageable() &&
+            for(int i = 0; i < inventory.getContainerSize(); i++) {
+                ItemStack foundStack = inventory.getItem(i);
+                if(!foundStack.isEmpty() && !foundStack.isDamageableItem() &&
                         !foundStack.hasContainerItem() && !FluidUtil.getFluidHandler(foundStack).isPresent() &&
                         !hasEnergy(foundStack) && foundStack.getRarity() == Rarity.COMMON) {
                     refundStack = foundStack.copy();
                     break;
                 }
             }
-            if(!refundStack.isEmpty() && player.addItemStackToInventory(refundStack)) {
+            if(!refundStack.isEmpty() && player.addItem(refundStack)) {
                 InventoryCheck.shrinkCoupon(player, CouponRegistry.CRAFTING_COUPON);
-                InventoryHelper.spawnItemStack(player.world, player.getPosX(), player.getPosY(), player.getPosZ(), refundStack);
+                InventoryHelper.dropItemStack(player.level, player.getX(), player.getY(), player.getZ(), refundStack);
             }
         }
     }
@@ -67,9 +67,9 @@ public class CouponHandler {
         if(stack.getItem() == CouponRegistry.LOOT_COUPON.get() && !nbt.contains(CouponReference.doubleLootTag) && target instanceof LivingEntity) {
             List<? extends String> blacklist = CouponConfig.COMMON.entityBlacklist.get();
             if((!blacklist.isEmpty() && !blacklist.contains(target.getType().getRegistryName().toString())) ||
-                    (CouponConfig.COMMON.doubleBossLoot.get() && !target.isNonBoss())) {
+                    (CouponConfig.COMMON.doubleBossLoot.get() && !target.canChangeDimensions())) {
                 nbt.putBoolean(CouponReference.doubleLootTag, true);
-                if(!player.abilities.isCreativeMode)
+                if(!player.abilities.instabuild)
                     stack.shrink(1);
             }
         }
@@ -83,7 +83,7 @@ public class CouponHandler {
             Collection<ItemEntity> drops = event.getDrops();
             Collection<ItemEntity> extra = new ArrayList<>();
             for(ItemEntity drop : drops) {
-                extra.add(new ItemEntity(drop.world, drop.getPosX(), drop.getPosY(), drop.getPosZ(), drop.getItem()));
+                extra.add(new ItemEntity(drop.level, drop.getX(), drop.getY(), drop.getZ(), drop.getItem()));
             }
 
             drops.addAll(extra);
@@ -95,18 +95,18 @@ public class CouponHandler {
         PlayerEntity player = event.getPlayer();
         if(event.getContainer() instanceof MerchantContainer && InventoryCheck.hasCoupon(player, CouponRegistry.TRADING_COUPON)) {
             MerchantContainer container = (MerchantContainer)event.getContainer();
-            if(!(container.merchant instanceof WanderingTraderEntity)) {
-                int offerSlot = player.getRNG().nextInt(container.getOffers().size());
+            if(!(container.trader instanceof WanderingTraderEntity)) {
+                int offerSlot = player.getRandom().nextInt(container.getOffers().size());
                 MerchantOffer randomOffer = container.getOffers().get(offerSlot);
                 int uses = randomOffer.getUses();
 
-                if(randomOffer.getBuyingStackFirst().getCount() > 1) {
+                if(randomOffer.getBaseCostA().getCount() > 1) {
                     CompoundNBT tag = player.getPersistentData();
                     tag.putInt(CouponReference.offerSlotTag, offerSlot);
                     tag.putInt(CouponReference.offerUsesTag, uses);
-                    tag.putInt(CouponReference.offerSpecialPrice, randomOffer.getSpecialPrice());
+                    tag.putInt(CouponReference.offerSpecialPrice, randomOffer.getSpecialPriceDiff());
 
-                    randomOffer.increaseSpecialPrice(-64);
+                    randomOffer.addToSpecialPriceDiff(-64);
                 }
             }
         }
@@ -127,7 +127,7 @@ public class CouponHandler {
                 tag.remove(CouponReference.offerSpecialPrice);
                 MerchantOffer randomOffer = container.getOffers().get(offerSlot);
                 if(previousUses != -1 && randomOffer.getUses() != previousUses) {
-                    randomOffer.setSpecialPrice(specialPrice);
+                    randomOffer.setSpecialPriceDiff(specialPrice);
                     InventoryCheck.shrinkCoupon(player, CouponRegistry.TRADING_COUPON);
                 }
             }

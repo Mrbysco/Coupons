@@ -15,17 +15,17 @@ import java.util.List;
 
 public class BrewingCouponItem extends CouponItem {
     public BrewingCouponItem(Properties properties) {
-        super(properties.maxStackSize(1));
+        super(properties.stacksTo(1));
     }
 
     @Override
     public ItemStack getDefaultInstance() {
-        return PotionUtils.addPotionToItemStack(super.getDefaultInstance(), Potions.WATER);
+        return PotionUtils.setPotion(super.getDefaultInstance(), Potions.WATER);
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent(CouponReference.MOD_ID + ":brewing_coupon_text").mergeStyle(TextFormatting.GOLD));
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(new TranslationTextComponent(CouponReference.MOD_ID + ":brewing_coupon_text").withStyle(TextFormatting.GOLD));
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 }

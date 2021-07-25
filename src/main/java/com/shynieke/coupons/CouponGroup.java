@@ -8,7 +8,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class CouponGroup {
     public static final ItemGroup GROUP = new ItemGroup(CouponReference.MOD_ID + ".couponGroup") {
         @OnlyIn(Dist.CLIENT)
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return new ItemStack(CouponRegistry.CRAFTING_COUPON.get());
         }
     };

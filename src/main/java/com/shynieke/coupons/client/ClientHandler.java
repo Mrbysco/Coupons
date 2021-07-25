@@ -31,15 +31,15 @@ public class ClientHandler {
         CompoundNBT nbt = entity.getPersistentData();
         if(entity.isAlive() && entity instanceof LivingEntity && nbt.contains(CouponReference.doubleLootTag)) {
             final LivingEntity livingEntity = (LivingEntity)entity;
-            final float f = livingEntity.getHeight() + 0.3F;
-            matrixStack.push();
+            final float f = livingEntity.getBbHeight() + 0.3F;
+            matrixStack.pushPose();
             matrixStack.translate(0.0D, (double)f, 0.0D);
             matrixStack.scale(0.3F, 0.3F, 0.3F);
-            float angle = 180 - MathHelper.lerp(event.getPartialTicks(), livingEntity.prevRotationYawHead, livingEntity.rotationYawHead);
-            matrixStack.rotate(Vector3f.YP.rotationDegrees(angle));
+            float angle = 180 - MathHelper.lerp(event.getPartialTicks(), livingEntity.yHeadRotO, livingEntity.yHeadRot);
+            matrixStack.mulPose(Vector3f.YP.rotationDegrees(angle));
 
-            Minecraft.getInstance().getFirstPersonRenderer().renderItemSide(livingEntity, stack, ItemCameraTransforms.TransformType.NONE, false, event.getMatrixStack(), event.getRenderTypeBuffer(), event.getPackedLight());
-            matrixStack.pop();
+            Minecraft.getInstance().getItemInHandRenderer().renderItem(livingEntity, stack, ItemCameraTransforms.TransformType.NONE, false, event.getMatrixStack(), event.getRenderTypeBuffer(), event.getPackedLight());
+            matrixStack.popPose();
         }
     }
 }
