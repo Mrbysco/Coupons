@@ -31,7 +31,7 @@ public class Coupons {
         MinecraftForge.EVENT_BUS.register(new CouponHandler());
         MinecraftForge.EVENT_BUS.register(new TraderHandler());
 
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             eventBus.addListener(ClientHandler::registerItemColors);
             MinecraftForge.EVENT_BUS.addListener(ClientHandler::nameplateEvent);
         });

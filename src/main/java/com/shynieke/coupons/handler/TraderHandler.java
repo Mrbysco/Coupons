@@ -2,13 +2,13 @@ package com.shynieke.coupons.handler;
 
 import com.shynieke.coupons.CouponRegistry;
 import com.shynieke.coupons.config.CouponConfig;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.merchant.villager.VillagerTrades.ITrade;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.MerchantOffer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -45,7 +45,7 @@ public class TraderHandler {
         return randomNumber.isPresent() ? randomNumber.getAsInt() : min;
     }
 
-    public static class ItemsForEmeraldsTrade implements ITrade {
+    public static class ItemsForEmeraldsTrade implements ItemListing {
         private final ItemStack outputStack;
         private final int outputAmount;
         private final int priceAmount;

@@ -5,10 +5,10 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class CouponConfig {
@@ -31,11 +31,9 @@ public class CouponConfig {
                     .comment("When enabled the loot coupon can double boss loot")
                     .define("doubleBossLoot", false);
 
-            String[] entities = new String[] { "" };
-
             entityBlacklist = builder
                     .comment("A list of entities that can't have loot doubled [Syntax: 'minecraft:bat']")
-                    .defineList("entityBlacklist", Arrays.asList(entities), o -> (o instanceof String));
+                    .defineListAllowEmpty(Collections.singletonList("entityBlacklist"), () -> Collections.singletonList(""), o -> (o instanceof String));
 
             builder.pop();
             builder.comment("Wandering Trader Trades")
@@ -85,12 +83,12 @@ public class CouponConfig {
     }
 
     @SubscribeEvent
-    public static void onLoad(final ModConfig.Loading configEvent) {
+    public static void onLoad(final ModConfigEvent.Loading configEvent) {
         Coupons.LOGGER.debug("Loaded Coupon's config file {}", configEvent.getConfig().getFileName());
     }
 
     @SubscribeEvent
-    public static void onFileChange(final ModConfig.Reloading configEvent) {
+    public static void onFileChange(final ModConfigEvent.Reloading configEvent) {
         Coupons.LOGGER.debug("Coupon's config just got changed on the file system!");
     }
 }

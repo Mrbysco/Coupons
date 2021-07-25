@@ -1,22 +1,22 @@
 package com.shynieke.coupons.util;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Supplier;
 
 public class InventoryCheck {
-    public static boolean hasCoupon(PlayerEntity player, Supplier<Item> item) {
+    public static boolean hasCoupon(Player player, Supplier<Item> item) {
         if(item.get() != null) {
-            ItemStack offStack = player.getItemInHand(Hand.OFF_HAND);
-            ItemStack mainStack = player.getItemInHand(Hand.MAIN_HAND);
+            ItemStack offStack = player.getItemInHand(InteractionHand.OFF_HAND);
+            ItemStack mainStack = player.getItemInHand(InteractionHand.MAIN_HAND);
             if ((!offStack.isEmpty() && offStack.getItem() == item.get()) || (!mainStack.isEmpty() && mainStack.getItem() == item.get())) {
                 return true;
             } else {
-                for(int i = 0; i < player.inventory.items.size(); ++i) {
-                    ItemStack itemstack = player.inventory.items.get(i);
+                for(int i = 0; i < player.getInventory().items.size(); ++i) {
+                    ItemStack itemstack = player.getInventory().items.get(i);
                     if (!itemstack.isEmpty() && itemstack.getItem() == item.get()) {
                         return true;
                     }
@@ -27,18 +27,18 @@ public class InventoryCheck {
         return false;
     }
 
-    public static void shrinkCoupon(PlayerEntity player, Supplier<Item> item) {
-        if(!player.abilities.instabuild) {
+    public static void shrinkCoupon(Player player, Supplier<Item> item) {
+        if(!player.getAbilities().instabuild) {
             if(item.get() != null) {
-                ItemStack offStack = player.getItemInHand(Hand.OFF_HAND);
-                ItemStack mainStack = player.getItemInHand(Hand.MAIN_HAND);
+                ItemStack offStack = player.getItemInHand(InteractionHand.OFF_HAND);
+                ItemStack mainStack = player.getItemInHand(InteractionHand.MAIN_HAND);
                 if (!offStack.isEmpty() && offStack.getItem() == item.get()) {
                     offStack.shrink(1);
                 } else if (!mainStack.isEmpty() && mainStack.getItem() == item.get()) {
                     mainStack.shrink(1);
                 } else {
-                    for(int i = 0; i < player.inventory.items.size(); ++i) {
-                        ItemStack itemstack = player.inventory.items.get(i);
+                    for(int i = 0; i < player.getInventory().items.size(); ++i) {
+                        ItemStack itemstack = player.getInventory().items.get(i);
                         if (!itemstack.isEmpty() && itemstack.getItem() == item.get()) {
                             itemstack.shrink(1);
                             break;

@@ -6,9 +6,9 @@ import com.shynieke.coupons.items.ExperienceCouponItem;
 import com.shynieke.coupons.items.FurnaceCouponItem;
 import com.shynieke.coupons.items.LootCouponItem;
 import com.shynieke.coupons.items.TradingCouponItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Rarity;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

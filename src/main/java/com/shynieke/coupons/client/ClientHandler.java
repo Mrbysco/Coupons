@@ -1,45 +1,42 @@
 package com.shynieke.coupons.client;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Vector3f;
 import com.shynieke.coupons.CouponReference;
 import com.shynieke.coupons.CouponRegistry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.PotionUtils;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.client.color.item.ItemColors;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.RenderNameplateEvent;
 
 public class ClientHandler {
     public static void registerItemColors(final ColorHandlerEvent.Item event) {
         ItemColors colors = event.getItemColors();
-        colors.register((p_198141_1_, p_198141_2_) -> {
-            return p_198141_2_ > 0 ? -1 : PotionUtils.getColor(p_198141_1_);
-        }, CouponRegistry.BREWING_COUPON.get());
+        colors.register((stack, tintIndex) -> tintIndex > 0 ? -1 : PotionUtils.getColor(stack), CouponRegistry.BREWING_COUPON.get());
     }
 
     public static void nameplateEvent(RenderNameplateEvent event) {
         Entity entity = event.getEntity();
-        MatrixStack matrixStack = event.getMatrixStack();
+        PoseStack poseStack = event.getMatrixStack();
         final ItemStack stack = new ItemStack(CouponRegistry.LOOT_COUPON.get());
-        CompoundNBT nbt = entity.getPersistentData();
-        if(entity.isAlive() && entity instanceof LivingEntity && nbt.contains(CouponReference.doubleLootTag)) {
-            final LivingEntity livingEntity = (LivingEntity)entity;
+        CompoundTag nbt = entity.getPersistentData();
+        if(entity.isAlive() && entity instanceof final LivingEntity livingEntity && nbt.contains(CouponReference.doubleLootTag)) {
             final float f = livingEntity.getBbHeight() + 0.3F;
-            matrixStack.pushPose();
-            matrixStack.translate(0.0D, (double)f, 0.0D);
-            matrixStack.scale(0.3F, 0.3F, 0.3F);
-            float angle = 180 - MathHelper.lerp(event.getPartialTicks(), livingEntity.yHeadRotO, livingEntity.yHeadRot);
-            matrixStack.mulPose(Vector3f.YP.rotationDegrees(angle));
+            poseStack.pushPose();
+            poseStack.translate(0.0D, (double)f, 0.0D);
+            poseStack.scale(0.3F, 0.3F, 0.3F);
+            float angle = 180 - Mth.lerp(event.getPartialTicks(), livingEntity.yHeadRotO, livingEntity.yHeadRot);
+            poseStack.mulPose(Vector3f.YP.rotationDegrees(angle));
 
-            Minecraft.getInstance().getItemInHandRenderer().renderItem(livingEntity, stack, ItemCameraTransforms.TransformType.NONE, false, event.getMatrixStack(), event.getRenderTypeBuffer(), event.getPackedLight());
-            matrixStack.popPose();
+            Minecraft.getInstance().getItemInHandRenderer().renderItem(livingEntity, stack, ItemTransforms.TransformType.NONE, false, event.getMatrixStack(), event.getRenderTypeBuffer(), event.getPackedLight());
+            poseStack.popPose();
         }
     }
 }
