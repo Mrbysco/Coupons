@@ -24,7 +24,7 @@ public class ClientHandler {
 
     public static void nameplateEvent(RenderNameplateEvent event) {
         Entity entity = event.getEntity();
-        PoseStack poseStack = event.getMatrixStack();
+        PoseStack poseStack = event.getPoseStack();
         final ItemStack stack = new ItemStack(CouponRegistry.LOOT_COUPON.get());
         CompoundTag nbt = entity.getPersistentData();
         if(entity.isAlive() && entity instanceof final LivingEntity livingEntity && nbt.contains(CouponReference.doubleLootTag)) {
@@ -32,10 +32,10 @@ public class ClientHandler {
             poseStack.pushPose();
             poseStack.translate(0.0D, (double)f, 0.0D);
             poseStack.scale(0.3F, 0.3F, 0.3F);
-            float angle = 180 - Mth.lerp(event.getPartialTicks(), livingEntity.yHeadRotO, livingEntity.yHeadRot);
+            float angle = 180 - Mth.lerp(event.getPartialTick(), livingEntity.yHeadRotO, livingEntity.yHeadRot);
             poseStack.mulPose(Vector3f.YP.rotationDegrees(angle));
 
-            Minecraft.getInstance().getItemInHandRenderer().renderItem(livingEntity, stack, ItemTransforms.TransformType.NONE, false, event.getMatrixStack(), event.getRenderTypeBuffer(), event.getPackedLight());
+            Minecraft.getInstance().getItemInHandRenderer().renderItem(livingEntity, stack, ItemTransforms.TransformType.NONE, false, event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight());
             poseStack.popPose();
         }
     }
