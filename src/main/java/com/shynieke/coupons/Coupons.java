@@ -1,5 +1,6 @@
 package com.shynieke.coupons;
 
+import com.mojang.logging.LogUtils;
 import com.shynieke.coupons.client.ClientHandler;
 import com.shynieke.coupons.config.CouponConfig;
 import com.shynieke.coupons.handler.BrewingHandler;
@@ -14,12 +15,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 
 @Mod(CouponReference.MOD_ID)
 public class Coupons {
-    public static final Logger LOGGER = LogManager.getLogger(CouponReference.MOD_ID);
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public Coupons() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
