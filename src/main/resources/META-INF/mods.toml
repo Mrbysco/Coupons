@@ -12,7 +12,7 @@ authors="ShyNieke, Mrbysco"
 description='''
 You get discount and you get discount. EVERYBODY GETS DISCOUNT!
 '''
-[[dependencies.enhancedfarming]]
+[[dependencies.coupons]]
 modId="minecraft"
 mandatory=true
 versionRange="[1.18,1.19)"
