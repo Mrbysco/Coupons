@@ -17,26 +17,27 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.RenderNameplateEvent;
 
 public class ClientHandler {
-    public static void registerItemColors(final ColorHandlerEvent.Item event) {
-        ItemColors colors = event.getItemColors();
-        colors.register((stack, tintIndex) -> tintIndex > 0 ? -1 : PotionUtils.getColor(stack), CouponRegistry.BREWING_COUPON.get());
-    }
+	public static void registerItemColors(final ColorHandlerEvent.Item event) {
+		ItemColors colors = event.getItemColors();
+		colors.register((stack, tintIndex) -> tintIndex > 0 ? -1 : PotionUtils.getColor(stack), CouponRegistry.BREWING_COUPON.get());
+	}
 
-    public static void nameplateEvent(RenderNameplateEvent event) {
-        Entity entity = event.getEntity();
-        PoseStack poseStack = event.getPoseStack();
-        final ItemStack stack = new ItemStack(CouponRegistry.LOOT_COUPON.get());
-        CompoundTag nbt = entity.getPersistentData();
-        if(entity.isAlive() && entity instanceof final LivingEntity livingEntity && nbt.contains(CouponReference.doubleLootTag)) {
-            final float f = livingEntity.getBbHeight() + 0.3F;
-            poseStack.pushPose();
-            poseStack.translate(0.0D, (double)f, 0.0D);
-            poseStack.scale(0.3F, 0.3F, 0.3F);
-            float angle = 180 - Mth.lerp(event.getPartialTick(), livingEntity.yHeadRotO, livingEntity.yHeadRot);
-            poseStack.mulPose(Vector3f.YP.rotationDegrees(angle));
+	public static void nameplateEvent(RenderNameplateEvent event) {
+		Entity entity = event.getEntity();
+		PoseStack poseStack = event.getPoseStack();
+		final ItemStack stack = new ItemStack(CouponRegistry.LOOT_COUPON.get());
+		CompoundTag nbt = entity.getPersistentData();
+		if (entity.isAlive() && entity instanceof final LivingEntity livingEntity && nbt.contains(CouponReference.doubleLootTag)) {
+			final float f = livingEntity.getBbHeight() + 0.3F;
+			poseStack.pushPose();
+			poseStack.translate(0.0D, (double) f, 0.0D);
+			poseStack.scale(0.3F, 0.3F, 0.3F);
+			float angle = 180 - Mth.lerp(event.getPartialTick(), livingEntity.yHeadRotO, livingEntity.yHeadRot);
+			poseStack.mulPose(Vector3f.YP.rotationDegrees(angle));
 
-            Minecraft.getInstance().getItemInHandRenderer().renderItem(livingEntity, stack, ItemTransforms.TransformType.NONE, false, event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight());
-            poseStack.popPose();
-        }
-    }
+			Minecraft.getInstance().getEntityRenderDispatcher().getItemInHandRenderer().renderItem(livingEntity, stack,
+					ItemTransforms.TransformType.NONE, false, event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight());
+			poseStack.popPose();
+		}
+	}
 }
