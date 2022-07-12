@@ -5,7 +5,6 @@ import com.mojang.math.Vector3f;
 import com.shynieke.coupons.CouponReference;
 import com.shynieke.coupons.CouponRegistry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
@@ -13,21 +12,20 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraftforge.client.event.ColorHandlerEvent;
-import net.minecraftforge.client.event.RenderNameplateEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.client.event.RenderNameTagEvent;
 
 public class ClientHandler {
-	public static void registerItemColors(final ColorHandlerEvent.Item event) {
-		ItemColors colors = event.getItemColors();
-		colors.register((stack, tintIndex) -> tintIndex > 0 ? -1 : PotionUtils.getColor(stack), CouponRegistry.BREWING_COUPON.get());
+	public static void registerItemColors(final RegisterColorHandlersEvent.Item event) {
+		event.register((stack, tintIndex) -> tintIndex > 0 ? -1 : PotionUtils.getColor(stack), CouponRegistry.BREWING_COUPON.get());
 	}
 
-	public static void nameplateEvent(RenderNameplateEvent event) {
+	public static void nameplateEvent(RenderNameTagEvent event) {
 		Entity entity = event.getEntity();
 		PoseStack poseStack = event.getPoseStack();
 		final ItemStack stack = new ItemStack(CouponRegistry.LOOT_COUPON.get());
 		CompoundTag nbt = entity.getPersistentData();
-		if (entity.isAlive() && entity instanceof final LivingEntity livingEntity && nbt.contains(CouponReference.doubleLootTag)) {
+		if (entity.isAlive() && entity instanceof LivingEntity livingEntity && nbt.contains(CouponReference.doubleLootTag)) {
 			final float f = livingEntity.getBbHeight() + 0.3F;
 			poseStack.pushPose();
 			poseStack.translate(0.0D, (double) f, 0.0D);

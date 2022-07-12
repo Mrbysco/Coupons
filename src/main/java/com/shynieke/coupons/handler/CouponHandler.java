@@ -34,7 +34,7 @@ public class CouponHandler {
 
 	@SubscribeEvent
 	public void onCrafting(ItemCraftedEvent event) {
-		Player player = event.getPlayer();
+		Player player = event.getEntity();
 		ItemStack result = event.getCrafting();
 		ResourceLocation location = ForgeRegistries.ITEMS.getKey(result.getItem());
 		if (location != null && !location.getNamespace().equalsIgnoreCase(CouponReference.MOD_ID) &&
@@ -44,7 +44,7 @@ public class CouponHandler {
 			for (int i = 0; i < inventory.getContainerSize(); i++) {
 				ItemStack foundStack = inventory.getItem(i);
 				if (!foundStack.isEmpty() && !foundStack.isDamageableItem() &&
-						!foundStack.hasContainerItem() && !FluidUtil.getFluidHandler(foundStack).isPresent() &&
+						!foundStack.hasCraftingRemainingItem() && !FluidUtil.getFluidHandler(foundStack).isPresent() &&
 						!hasEnergy(foundStack) && foundStack.getRarity() == Rarity.COMMON) {
 					refundStack = foundStack.copy();
 					break;
@@ -63,13 +63,13 @@ public class CouponHandler {
 
 	@SubscribeEvent
 	public void onRightClick(PlayerInteractEvent.EntityInteract event) {
-		Player player = event.getPlayer();
+		Player player = event.getEntity();
 		Entity target = event.getTarget();
 		CompoundTag nbt = target.getPersistentData();
 		ItemStack stack = event.getItemStack();
 		if (stack.getItem() == CouponRegistry.LOOT_COUPON.get() && !nbt.contains(CouponReference.doubleLootTag) && target instanceof LivingEntity) {
 			List<? extends String> blacklist = CouponConfig.COMMON.entityBlacklist.get();
-			ResourceLocation location = ForgeRegistries.ENTITIES.getKey(target.getType());
+			ResourceLocation location = ForgeRegistries.ENTITY_TYPES.getKey(target.getType());
 			if ((!blacklist.isEmpty() && location != null && !blacklist.contains(location.toString())) ||
 					(CouponConfig.COMMON.doubleBossLoot.get() && !target.canChangeDimensions())) {
 				nbt.putBoolean(CouponReference.doubleLootTag, true);
@@ -81,7 +81,7 @@ public class CouponHandler {
 
 	@SubscribeEvent
 	public void livingDropsEvent(LivingDropsEvent event) {
-		LivingEntity entity = event.getEntityLiving();
+		LivingEntity entity = event.getEntity();
 		CompoundTag nbt = entity.getPersistentData();
 		if (nbt.contains(CouponReference.doubleLootTag) && nbt.getBoolean(CouponReference.doubleLootTag)) {
 			Collection<ItemEntity> drops = event.getDrops();
@@ -96,7 +96,7 @@ public class CouponHandler {
 
 	@SubscribeEvent
 	public void onContainer(PlayerContainerEvent.Open event) {
-		Player player = event.getPlayer();
+		Player player = event.getEntity();
 		if (event.getContainer() instanceof MerchantMenu container && InventoryCheck.hasCoupon(player, CouponRegistry.TRADING_COUPON)) {
 			if (!(container.trader instanceof WanderingTrader)) {
 				int offerSlot = player.getRandom().nextInt(container.getOffers().size());
@@ -117,7 +117,7 @@ public class CouponHandler {
 
 	@SubscribeEvent
 	public void onContainerClose(PlayerContainerEvent.Close event) {
-		Player player = event.getPlayer();
+		Player player = event.getEntity();
 		if (event.getContainer() instanceof MerchantMenu container && InventoryCheck.hasCoupon(player, CouponRegistry.TRADING_COUPON)) {
 			CompoundTag tag = player.getPersistentData();
 			if (tag.contains(CouponReference.offerSlotTag) && tag.contains(CouponReference.offerUsesTag) && tag.contains(CouponReference.offerSpecialPrice)) {
