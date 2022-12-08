@@ -27,6 +27,7 @@ public class Coupons {
 		eventBus.register(CouponConfig.class);
 
 		eventBus.addListener(this::setup);
+		eventBus.register(new CouponGroup());
 		CouponRegistry.ITEMS.register(eventBus);
 		MinecraftForge.EVENT_BUS.register(new CouponHandler());
 		MinecraftForge.EVENT_BUS.register(new TraderHandler());

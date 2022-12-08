@@ -17,7 +17,7 @@ import net.minecraft.world.inventory.MerchantMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.trading.MerchantOffer;
-import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.ItemCraftedEvent;
@@ -58,7 +58,7 @@ public class CouponHandler {
 	}
 
 	public static boolean hasEnergy(ItemStack itemStack) {
-		return itemStack.getCapability(CapabilityEnergy.ENERGY).isPresent();
+		return itemStack.getCapability(ForgeCapabilities.ENERGY).isPresent();
 	}
 
 	@SubscribeEvent

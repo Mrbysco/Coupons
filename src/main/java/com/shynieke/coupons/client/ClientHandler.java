@@ -1,7 +1,7 @@
 package com.shynieke.coupons.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.shynieke.coupons.CouponReference;
 import com.shynieke.coupons.CouponRegistry;
 import net.minecraft.client.Minecraft;
@@ -31,7 +31,7 @@ public class ClientHandler {
 			poseStack.translate(0.0D, (double) f, 0.0D);
 			poseStack.scale(0.3F, 0.3F, 0.3F);
 			float angle = 180 - Mth.lerp(event.getPartialTick(), livingEntity.yHeadRotO, livingEntity.yHeadRot);
-			poseStack.mulPose(Vector3f.YP.rotationDegrees(angle));
+			poseStack.mulPose(Axis.YP.rotationDegrees(angle));
 
 			Minecraft.getInstance().getEntityRenderDispatcher().getItemInHandRenderer().renderItem(livingEntity, stack,
 					ItemTransforms.TransformType.NONE, false, event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight());

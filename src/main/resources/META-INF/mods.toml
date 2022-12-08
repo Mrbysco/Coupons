@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[41,)"
+loaderVersion="[44,)"
 issueTrackerURL="https://github.com/mrbysco/Coupons/issues"
 license="MIT"
 
@@ -15,12 +15,6 @@ You get discount and you get discount. EVERYBODY GETS DISCOUNT!
 [[dependencies.coupons]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.19,1.20)"
-ordering="NONE"
-side="BOTH"
-[[dependencies.coupons]]
-modId="forge"
-mandatory=true
-versionRange="[41.0.94,)"
+versionRange="[1.19.3,1.20)"
 ordering="NONE"
 side="BOTH"
