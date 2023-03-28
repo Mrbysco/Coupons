@@ -17,7 +17,7 @@ public class CouponGroup {
 		GROUP = event.registerCreativeModeTab(new ResourceLocation(CouponReference.MOD_ID, "coupon"), builder ->
 				builder.icon(() -> new ItemStack(CouponRegistry.CRAFTING_COUPON.get()))
 						.title(Component.translatable("itemGroup.coupons.couponGroup"))
-						.displayItems((features, output, hasPermissions) -> {
+						.displayItems((displayParameters, output) -> {
 							List<ItemStack> stacks = CouponRegistry.ITEMS.getEntries().stream().map(reg -> new ItemStack(reg.get())).toList();
 							output.acceptAll(stacks);
 						}));

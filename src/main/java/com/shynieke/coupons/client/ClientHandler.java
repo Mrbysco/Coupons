@@ -5,11 +5,11 @@ import com.mojang.math.Axis;
 import com.shynieke.coupons.CouponReference;
 import com.shynieke.coupons.CouponRegistry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
@@ -34,7 +34,7 @@ public class ClientHandler {
 			poseStack.mulPose(Axis.YP.rotationDegrees(angle));
 
 			Minecraft.getInstance().getEntityRenderDispatcher().getItemInHandRenderer().renderItem(livingEntity, stack,
-					ItemTransforms.TransformType.NONE, false, event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight());
+					ItemDisplayContext.NONE, false, event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight());
 			poseStack.popPose();
 		}
 	}
