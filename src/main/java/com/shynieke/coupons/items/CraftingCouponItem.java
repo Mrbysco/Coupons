@@ -12,13 +12,13 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class CraftingCouponItem extends CouponItem {
-    public CraftingCouponItem(Properties properties) {
-        super(properties);
-    }
+	public CraftingCouponItem(Properties properties) {
+		super(properties);
+	}
 
-    @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        tooltip.add(new TranslatableComponent(CouponReference.MOD_ID + ":crafting_coupon_text").withStyle(ChatFormatting.GOLD));
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
-    }
+	@Override
+	public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+		tooltip.add(new TranslatableComponent(CouponReference.MOD_ID + ":crafting_coupon_text").withStyle(ChatFormatting.GOLD));
+		super.appendHoverText(stack, worldIn, tooltip, flagIn);
+	}
 }

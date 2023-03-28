@@ -19,25 +19,25 @@ import org.slf4j.Logger;
 
 @Mod(CouponReference.MOD_ID)
 public class Coupons {
-    public static final Logger LOGGER = LogUtils.getLogger();
+	public static final Logger LOGGER = LogUtils.getLogger();
 
-    public Coupons() {
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CouponConfig.commonSpec);
-        eventBus.register(CouponConfig.class);
+	public Coupons() {
+		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CouponConfig.commonSpec);
+		eventBus.register(CouponConfig.class);
 
-        eventBus.addListener(this::setup);
-        CouponRegistry.ITEMS.register(eventBus);
-        MinecraftForge.EVENT_BUS.register(new CouponHandler());
-        MinecraftForge.EVENT_BUS.register(new TraderHandler());
+		eventBus.addListener(this::setup);
+		CouponRegistry.ITEMS.register(eventBus);
+		MinecraftForge.EVENT_BUS.register(new CouponHandler());
+		MinecraftForge.EVENT_BUS.register(new TraderHandler());
 
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-            eventBus.addListener(ClientHandler::registerItemColors);
-            MinecraftForge.EVENT_BUS.addListener(ClientHandler::nameplateEvent);
-        });
-    }
+		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+			eventBus.addListener(ClientHandler::registerItemColors);
+			MinecraftForge.EVENT_BUS.addListener(ClientHandler::nameplateEvent);
+		});
+	}
 
-    private void setup(final FMLCommonSetupEvent event) {
-        BrewingHandler.registerBrewingRecipes();
-    }
+	private void setup(final FMLCommonSetupEvent event) {
+		BrewingHandler.registerBrewingRecipes();
+	}
 }
