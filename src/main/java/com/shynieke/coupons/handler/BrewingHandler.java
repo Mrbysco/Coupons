@@ -1,6 +1,6 @@
 package com.shynieke.coupons.handler;
 
-import com.shynieke.coupons.CouponRegistry;
+import com.shynieke.coupons.registry.CouponRegistry;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;

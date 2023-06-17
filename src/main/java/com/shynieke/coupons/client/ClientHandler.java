@@ -3,7 +3,7 @@ package com.shynieke.coupons.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.shynieke.coupons.CouponReference;
-import com.shynieke.coupons.CouponRegistry;
+import com.shynieke.coupons.registry.CouponRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;

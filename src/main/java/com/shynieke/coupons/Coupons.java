@@ -6,6 +6,7 @@ import com.shynieke.coupons.config.CouponConfig;
 import com.shynieke.coupons.handler.BrewingHandler;
 import com.shynieke.coupons.handler.CouponHandler;
 import com.shynieke.coupons.handler.TraderHandler;
+import com.shynieke.coupons.registry.CouponRegistry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -27,8 +28,8 @@ public class Coupons {
 		eventBus.register(CouponConfig.class);
 
 		eventBus.addListener(this::setup);
-		eventBus.register(new CouponGroup());
 		CouponRegistry.ITEMS.register(eventBus);
+		CouponRegistry.CREATIVE_MODE_TABS.register(eventBus);
 		MinecraftForge.EVENT_BUS.register(new CouponHandler());
 		MinecraftForge.EVENT_BUS.register(new TraderHandler());
 
@@ -39,6 +40,8 @@ public class Coupons {
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
-		BrewingHandler.registerBrewingRecipes();
+		event.enqueueWork(() -> {
+			BrewingHandler.registerBrewingRecipes();
+		});
 	}
 }

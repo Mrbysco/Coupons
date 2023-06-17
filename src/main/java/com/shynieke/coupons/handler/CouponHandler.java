@@ -1,7 +1,7 @@
 package com.shynieke.coupons.handler;
 
 import com.shynieke.coupons.CouponReference;
-import com.shynieke.coupons.CouponRegistry;
+import com.shynieke.coupons.registry.CouponRegistry;
 import com.shynieke.coupons.config.CouponConfig;
 import com.shynieke.coupons.util.InventoryCheck;
 import net.minecraft.nbt.CompoundTag;
@@ -52,7 +52,7 @@ public class CouponHandler {
 			}
 			if (!refundStack.isEmpty() && player.addItem(refundStack)) {
 				InventoryCheck.shrinkCoupon(player, CouponRegistry.CRAFTING_COUPON);
-				Containers.dropItemStack(player.level, player.getX(), player.getY(), player.getZ(), refundStack);
+				Containers.dropItemStack(player.level(), player.getX(), player.getY(), player.getZ(), refundStack);
 			}
 		}
 	}
@@ -87,7 +87,7 @@ public class CouponHandler {
 			Collection<ItemEntity> drops = event.getDrops();
 			Collection<ItemEntity> extra = new ArrayList<>();
 			for (ItemEntity drop : drops) {
-				extra.add(new ItemEntity(drop.level, drop.getX(), drop.getY(), drop.getZ(), drop.getItem()));
+				extra.add(new ItemEntity(drop.level(), drop.getX(), drop.getY(), drop.getZ(), drop.getItem()));
 			}
 
 			drops.addAll(extra);
