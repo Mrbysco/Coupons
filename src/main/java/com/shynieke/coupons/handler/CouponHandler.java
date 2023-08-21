@@ -47,6 +47,7 @@ public class CouponHandler {
 						!foundStack.hasCraftingRemainingItem() && !FluidUtil.getFluidHandler(foundStack).isPresent() &&
 						!hasEnergy(foundStack) && foundStack.getRarity() == Rarity.COMMON) {
 					refundStack = foundStack.copy();
+					refundStack.setCount(1);
 					break;
 				}
 			}
