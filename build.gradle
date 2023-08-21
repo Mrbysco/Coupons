@@ -88,10 +88,9 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-	maven {
-        name = "Progwml6 maven"
-		url = "https://dvs1.progwml6.com/files/maven"
-	}
+    maven {
+        url = "https://maven.blamejared.com"
+    }
 }
 
 dependencies {
