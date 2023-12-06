@@ -7,15 +7,14 @@ import com.shynieke.coupons.handler.BrewingHandler;
 import com.shynieke.coupons.handler.CouponHandler;
 import com.shynieke.coupons.handler.TraderHandler;
 import com.shynieke.coupons.registry.CouponRegistry;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 
 @Mod(CouponReference.MOD_ID)
@@ -30,13 +29,13 @@ public class Coupons {
 		eventBus.addListener(this::setup);
 		CouponRegistry.ITEMS.register(eventBus);
 		CouponRegistry.CREATIVE_MODE_TABS.register(eventBus);
-		MinecraftForge.EVENT_BUS.register(new CouponHandler());
-		MinecraftForge.EVENT_BUS.register(new TraderHandler());
+		NeoForge.EVENT_BUS.register(new CouponHandler());
+		NeoForge.EVENT_BUS.register(new TraderHandler());
 
-		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+		if (FMLEnvironment.dist.isClient()) {
 			eventBus.addListener(ClientHandler::registerItemColors);
-			MinecraftForge.EVENT_BUS.addListener(ClientHandler::nameplateEvent);
-		});
+			NeoForge.EVENT_BUS.addListener(ClientHandler::nameplateEvent);
+		}
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {

@@ -21,10 +21,10 @@ public class ExperienceCouponItem extends CouponItem {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
+	public InteractionResultHolder<ItemStack> use(Level level, Player playerIn, InteractionHand handIn) {
 		ItemStack stack = playerIn.getItemInHand(handIn);
 
-		if (!worldIn.isClientSide()) {
+		if (!level.isClientSide()) {
 			boolean creative = playerIn.getAbilities().instabuild;
 			if (playerIn.isCrouching()) {
 				playerIn.giveExperienceLevels(stack.getCount());
@@ -37,17 +37,17 @@ public class ExperienceCouponItem extends CouponItem {
 			}
 		}
 
-		return super.use(worldIn, playerIn, handIn);
+		return super.use(level, playerIn, handIn);
 	}
 
 	@Override
-	public InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity target, InteractionHand hand) {
-		return super.interactLivingEntity(stack, playerIn, target, hand);
+	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
+		return super.interactLivingEntity(stack, player, target, hand);
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flagIn) {
 		tooltip.add(Component.translatable(CouponReference.MOD_ID + ":experience_coupon_text").withStyle(ChatFormatting.GOLD));
-		super.appendHoverText(stack, worldIn, tooltip, flagIn);
+		super.appendHoverText(stack, level, tooltip, flagIn);
 	}
 }

@@ -12,8 +12,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraftforge.client.event.RegisterColorHandlersEvent;
-import net.minecraftforge.client.event.RenderNameTagEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RenderNameTagEvent;
 
 public class ClientHandler {
 	public static void registerItemColors(final RegisterColorHandlersEvent.Item event) {
@@ -26,9 +26,9 @@ public class ClientHandler {
 		final ItemStack stack = new ItemStack(CouponRegistry.LOOT_COUPON.get());
 		CompoundTag nbt = entity.getPersistentData();
 		if (entity.isAlive() && entity instanceof LivingEntity livingEntity && nbt.contains(CouponReference.doubleLootTag)) {
-			final float f = livingEntity.getBbHeight() + 0.3F;
+			final double f = livingEntity.getBbHeight() + 0.3F;
 			poseStack.pushPose();
-			poseStack.translate(0.0D, (double) f, 0.0D);
+			poseStack.translate(0.0D, f, 0.0D);
 			poseStack.scale(0.3F, 0.3F, 0.3F);
 			float angle = 180 - Mth.lerp(event.getPartialTick(), livingEntity.yHeadRotO, livingEntity.yHeadRot);
 			poseStack.mulPose(Axis.YP.rotationDegrees(angle));

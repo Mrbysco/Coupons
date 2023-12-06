@@ -1,5 +1,6 @@
 package com.shynieke.coupons.util;
 
+import com.shynieke.coupons.items.CouponItem;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -8,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.function.Supplier;
 
 public class InventoryCheck {
-	public static boolean hasCoupon(Player player, Supplier<Item> item) {
+	public static boolean hasCoupon(Player player, Supplier<? extends CouponItem> item) {
 		if (item.get() != null) {
 			ItemStack offStack = player.getItemInHand(InteractionHand.OFF_HAND);
 			ItemStack mainStack = player.getItemInHand(InteractionHand.MAIN_HAND);
@@ -27,7 +28,7 @@ public class InventoryCheck {
 		return false;
 	}
 
-	public static void shrinkCoupon(Player player, Supplier<Item> item) {
+	public static void shrinkCoupon(Player player, Supplier<? extends CouponItem> item) {
 		if (!player.getAbilities().instabuild) {
 			if (item.get() != null) {
 				ItemStack offStack = player.getItemInHand(InteractionHand.OFF_HAND);

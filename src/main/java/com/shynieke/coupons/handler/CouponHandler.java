@@ -1,9 +1,10 @@
 package com.shynieke.coupons.handler;
 
 import com.shynieke.coupons.CouponReference;
-import com.shynieke.coupons.registry.CouponRegistry;
 import com.shynieke.coupons.config.CouponConfig;
+import com.shynieke.coupons.registry.CouponRegistry;
 import com.shynieke.coupons.util.InventoryCheck;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -17,14 +18,13 @@ import net.minecraft.world.inventory.MerchantMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.trading.MerchantOffer;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.player.PlayerContainerEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent.ItemCraftedEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.common.capabilities.Capabilities;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerContainerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent.ItemCraftedEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.fluids.FluidUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,7 +36,7 @@ public class CouponHandler {
 	public void onCrafting(ItemCraftedEvent event) {
 		Player player = event.getEntity();
 		ItemStack result = event.getCrafting();
-		ResourceLocation location = ForgeRegistries.ITEMS.getKey(result.getItem());
+		ResourceLocation location = BuiltInRegistries.ITEM.getKey(result.getItem());
 		if (location != null && !location.getNamespace().equalsIgnoreCase(CouponReference.MOD_ID) &&
 				InventoryCheck.hasCoupon(player, CouponRegistry.CRAFTING_COUPON)) {
 			Container inventory = event.getInventory();
@@ -59,7 +59,7 @@ public class CouponHandler {
 	}
 
 	public static boolean hasEnergy(ItemStack itemStack) {
-		return itemStack.getCapability(ForgeCapabilities.ENERGY).isPresent();
+		return itemStack.getCapability(Capabilities.ENERGY).isPresent();
 	}
 
 	@SubscribeEvent
@@ -70,7 +70,7 @@ public class CouponHandler {
 		ItemStack stack = event.getItemStack();
 		if (stack.getItem() == CouponRegistry.LOOT_COUPON.get() && !nbt.contains(CouponReference.doubleLootTag) && target instanceof LivingEntity) {
 			List<? extends String> blacklist = CouponConfig.COMMON.entityBlacklist.get();
-			ResourceLocation location = ForgeRegistries.ENTITY_TYPES.getKey(target.getType());
+			ResourceLocation location = BuiltInRegistries.ENTITY_TYPE.getKey(target.getType());
 			if ((!blacklist.isEmpty() && location != null && !blacklist.contains(location.toString())) ||
 					(CouponConfig.COMMON.doubleBossLoot.get() && !target.canChangeDimensions())) {
 				nbt.putBoolean(CouponReference.doubleLootTag, true);
