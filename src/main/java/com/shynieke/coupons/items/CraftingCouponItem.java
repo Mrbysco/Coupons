@@ -1,6 +1,6 @@
 package com.shynieke.coupons.items;
 
-import com.shynieke.coupons.CouponReference;
+import com.shynieke.coupons.Reference;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +17,7 @@ public class CraftingCouponItem extends CouponItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flagIn) {
-		tooltip.add(Component.translatable(CouponReference.MOD_ID + ":crafting_coupon_text").withStyle(ChatFormatting.GOLD));
+		tooltip.add(Component.translatable(Reference.MOD_ID + ":crafting_coupon_text").withStyle(ChatFormatting.GOLD));
 		super.appendHoverText(stack, level, tooltip, flagIn);
 	}
 }

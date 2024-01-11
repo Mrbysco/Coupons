@@ -1,6 +1,6 @@
 {
   "_comment": "Creative Tab Name",
-  "itemGroup.coupons.couponGroup": "Coupons Tab",
+  "itemGroup.coupons": "Coupons Tab",
 
   "_comment": "Item names",
   "item.coupons.crafting_coupon": "Crafting Coupon",

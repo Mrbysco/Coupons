@@ -2,7 +2,7 @@ package com.shynieke.coupons.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import com.shynieke.coupons.CouponReference;
+import com.shynieke.coupons.Reference;
 import com.shynieke.coupons.registry.CouponRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
@@ -25,7 +25,7 @@ public class ClientHandler {
 		PoseStack poseStack = event.getPoseStack();
 		final ItemStack stack = new ItemStack(CouponRegistry.LOOT_COUPON.get());
 		CompoundTag nbt = entity.getPersistentData();
-		if (entity.isAlive() && entity instanceof LivingEntity livingEntity && nbt.contains(CouponReference.doubleLootTag)) {
+		if (entity.isAlive() && entity instanceof LivingEntity livingEntity && nbt.contains(Reference.doubleLootTag)) {
 			final double f = livingEntity.getBbHeight() + 0.3F;
 			poseStack.pushPose();
 			poseStack.translate(0.0D, f, 0.0D);

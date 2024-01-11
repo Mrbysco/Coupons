@@ -1,6 +1,6 @@
 package com.shynieke.coupons;
 
-public class CouponReference {
+public class Reference {
 	public static final String MOD_ID = "coupons";
 
 	public static final String doubleLootTag = MOD_ID + ":doubleLoot";

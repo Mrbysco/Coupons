@@ -7,22 +7,20 @@ import com.shynieke.coupons.handler.BrewingHandler;
 import com.shynieke.coupons.handler.CouponHandler;
 import com.shynieke.coupons.handler.TraderHandler;
 import com.shynieke.coupons.registry.CouponRegistry;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
-@Mod(CouponReference.MOD_ID)
+@Mod(Reference.MOD_ID)
 public class Coupons {
 	public static final Logger LOGGER = LogUtils.getLogger();
 
-	public Coupons() {
-		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+	public Coupons(IEventBus eventBus) {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CouponConfig.commonSpec);
 		eventBus.register(CouponConfig.class);
 
