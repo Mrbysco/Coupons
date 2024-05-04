@@ -3,16 +3,14 @@ package com.shynieke.coupons;
 import com.mojang.logging.LogUtils;
 import com.shynieke.coupons.client.ClientHandler;
 import com.shynieke.coupons.config.CouponConfig;
-import com.shynieke.coupons.handler.BrewingHandler;
 import com.shynieke.coupons.handler.CouponHandler;
 import com.shynieke.coupons.handler.TraderHandler;
 import com.shynieke.coupons.registry.CouponRegistry;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
@@ -20,25 +18,18 @@ import org.slf4j.Logger;
 public class Coupons {
 	public static final Logger LOGGER = LogUtils.getLogger();
 
-	public Coupons(IEventBus eventBus) {
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CouponConfig.commonSpec);
+	public Coupons(IEventBus eventBus, Dist dist, ModContainer container) {
+		container.registerConfig(ModConfig.Type.COMMON, CouponConfig.commonSpec);
 		eventBus.register(CouponConfig.class);
 
-		eventBus.addListener(this::setup);
 		CouponRegistry.ITEMS.register(eventBus);
 		CouponRegistry.CREATIVE_MODE_TABS.register(eventBus);
 		NeoForge.EVENT_BUS.register(new CouponHandler());
 		NeoForge.EVENT_BUS.register(new TraderHandler());
 
-		if (FMLEnvironment.dist.isClient()) {
+		if (dist.isClient()) {
 			eventBus.addListener(ClientHandler::registerItemColors);
 			NeoForge.EVENT_BUS.addListener(ClientHandler::nameplateEvent);
 		}
-	}
-
-	private void setup(final FMLCommonSetupEvent event) {
-		event.enqueueWork(() -> {
-			BrewingHandler.registerBrewingRecipes();
-		});
 	}
 }
