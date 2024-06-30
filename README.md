@@ -1,3 +1,5 @@
+[![build](https://github.com/Mrbysco/Coupons/actions/workflows/build.yml/badge.svg)](https://github.com/Mrbysco/Coupons/actions/workflows/build.yml)
+[![](http://cf.way2muchnoise.eu/versions/411738.svg)](https://www.curseforge.com/minecraft/mc-mods/coupons)
 # Coupons Mod #
 
 ## About ##
