@@ -72,7 +72,7 @@ public class CouponHandler {
 			List<? extends String> blacklist = CouponConfig.COMMON.entityBlacklist.get();
 			ResourceLocation location = BuiltInRegistries.ENTITY_TYPE.getKey(target.getType());
 			if ((!blacklist.isEmpty() && location != null && !blacklist.contains(location.toString())) ||
-					(CouponConfig.COMMON.doubleBossLoot.get() && !target.canChangeDimensions())) {
+					(CouponConfig.COMMON.doubleBossLoot.get())) {
 				nbt.putBoolean(Reference.doubleLootTag, true);
 				if (!player.getAbilities().instabuild)
 					stack.shrink(1);

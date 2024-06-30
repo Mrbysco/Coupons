@@ -72,7 +72,9 @@ public class TraderHandler {
 		}
 
 		public MerchantOffer getOffer(Entity trader, RandomSource rand) {
-			return new MerchantOffer(new ItemCost(Items.EMERALD, this.priceAmount), new ItemStack(this.outputStack.getItem(), this.outputAmount), this.maxUses, this.givenExp, this.priceMultiplier);
+			return new MerchantOffer(new ItemCost(Items.EMERALD, this.priceAmount),
+					new ItemStack(this.outputStack.getItem(), this.outputAmount),
+					this.maxUses, this.givenExp, this.priceMultiplier);
 		}
 	}
 }
