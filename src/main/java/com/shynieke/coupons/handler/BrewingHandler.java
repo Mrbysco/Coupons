@@ -18,11 +18,10 @@ public class BrewingHandler {
 	@SubscribeEvent
 	public static void registerBrewingRecipes(RegisterBrewingRecipesEvent event) {
 		var builder = event.getBuilder();
-		ItemStack couponStack = CouponRegistry.BREWING_COUPON.get().getDefaultInstance();
 		ItemStack awkwardStack = Items.POTION.getDefaultInstance();
 		awkwardStack.update(DataComponents.POTION_CONTENTS, PotionContents.EMPTY, Potions.AWKWARD, PotionContents::withPotion);
 
-		builder.addRecipe(Ingredient.of(couponStack),
+		builder.addRecipe(Ingredient.of(CouponRegistry.BREWING_COUPON.get()),
 				Ingredient.of(Items.NETHER_WART), awkwardStack);
 	}
 }

@@ -2,32 +2,40 @@ package com.shynieke.coupons.datagen.client;
 
 import com.shynieke.coupons.Reference;
 import com.shynieke.coupons.registry.CouponRegistry;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import org.jetbrains.annotations.NotNull;
 
-public class CouponModelProvider extends ItemModelProvider {
-	public CouponModelProvider(PackOutput packOutput, ExistingFileHelper helper) {
-		super(packOutput, Reference.MOD_ID, helper);
+public class CouponModelProvider extends ModelProvider {
+	public CouponModelProvider(PackOutput packOutput) {
+		super(packOutput, Reference.MOD_ID);
 	}
 
 	@Override
-	protected void registerModels() {
+	protected void registerModels(@NotNull BlockModelGenerators blockModels, @NotNull ItemModelGenerators itemModels) {
 		for (DeferredHolder<Item, ? extends Item> registryObject : CouponRegistry.ITEMS.getEntries()) {
-			generatedItem(registryObject.getId());
+			if (registryObject.getId().equals(CouponRegistry.BREWING_COUPON.getId())) {
+				generatePotionCoupon(itemModels);
+			} else {
+				itemModels.generateFlatItem(registryObject.get(), ModelTemplates.FLAT_ITEM);
+			}
 		}
 	}
 
-	private void generatedItem(ResourceLocation location) {
-		if (location.getPath().equalsIgnoreCase("brewing_coupon")) {
-			singleTexture(location.getPath(), ResourceLocation.withDefaultNamespace("item/generated"),
-					"layer0", Reference.modLoc("item/" + location.getPath()).withSuffix("_overlay")).texture("layer1", Reference.modLoc("item/" + location.getPath()));
-		} else {
-			singleTexture(location.getPath(), ResourceLocation.withDefaultNamespace("item/generated"),
-					"layer0", Reference.modLoc("item/" + location.getPath()));
-		}
+	public void generatePotionCoupon(ItemModelGenerators generators) {
+		Item item = CouponRegistry.BREWING_COUPON.get();
+		ResourceLocation resourcelocation = generators.generateLayeredItem(
+				item, ModelLocationUtils.decorateItemModelLocation("coupons:brewing_coupon_overlay"),
+				ModelLocationUtils.getModelLocation(item)
+		);
+		generators.addPotionTint(item, resourcelocation);
 	}
+
 }

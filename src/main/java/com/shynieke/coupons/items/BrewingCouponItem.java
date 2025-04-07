@@ -19,7 +19,7 @@ public class BrewingCouponItem extends CouponItem {
 	@Override
 	public ItemStack getDefaultInstance() {
 		ItemStack stack = super.getDefaultInstance();
-		stack.update(DataComponents.POTION_CONTENTS, PotionContents.EMPTY, Potions.WATER, PotionContents::withPotion);
+		stack.set(DataComponents.POTION_CONTENTS, new PotionContents(Potions.WATER));
 		return stack;
 	}
 

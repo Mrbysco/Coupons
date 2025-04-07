@@ -24,6 +24,7 @@ public class Coupons {
 		container.registerConfig(ModConfig.Type.COMMON, CouponConfig.commonSpec);
 		eventBus.register(CouponConfig.class);
 
+		CouponRegistry.ATTACHMENT_TYPES.register(eventBus);
 		CouponRegistry.ITEMS.register(eventBus);
 		CouponRegistry.CREATIVE_MODE_TABS.register(eventBus);
 		NeoForge.EVENT_BUS.register(new CouponHandler());
@@ -31,7 +32,7 @@ public class Coupons {
 
 		if (dist.isClient()) {
 			container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
-			eventBus.addListener(ClientHandler::registerItemColors);
+			eventBus.addListener(ClientHandler::registerCustomRenderData);
 			NeoForge.EVENT_BUS.addListener(ClientHandler::nameplateEvent);
 		}
 	}
