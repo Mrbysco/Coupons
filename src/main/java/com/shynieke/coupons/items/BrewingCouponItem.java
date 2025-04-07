@@ -8,8 +8,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.component.TooltipDisplay;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class BrewingCouponItem extends CouponItem {
 	public BrewingCouponItem(Properties properties) {
@@ -24,8 +25,7 @@ public class BrewingCouponItem extends CouponItem {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
-		tooltip.add(Component.translatable(Reference.MOD_ID + ":brewing_coupon_text").withStyle(ChatFormatting.GOLD));
-		super.appendHoverText(stack, context, tooltip, flagIn);
+	public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> consumer, TooltipFlag flag) {
+		consumer.accept(Component.translatable(Reference.MOD_ID + ":brewing_coupon_text").withStyle(ChatFormatting.GOLD));
 	}
 }

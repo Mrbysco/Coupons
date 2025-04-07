@@ -15,8 +15,8 @@ public class InventoryCheck {
 			if ((!offStack.isEmpty() && offStack.getItem() == item.get()) || (!mainStack.isEmpty() && mainStack.getItem() == item.get())) {
 				return true;
 			} else {
-				for (int i = 0; i < player.getInventory().items.size(); ++i) {
-					ItemStack itemstack = player.getInventory().items.get(i);
+				for (int i = 0; i < player.getInventory().getNonEquipmentItems().size(); ++i) {
+					ItemStack itemstack = player.getInventory().getNonEquipmentItems().get(i);
 					if (!itemstack.isEmpty() && itemstack.getItem() == item.get()) {
 						return true;
 					}
@@ -37,8 +37,8 @@ public class InventoryCheck {
 				} else if (!mainStack.isEmpty() && mainStack.getItem() == item.get()) {
 					mainStack.shrink(1);
 				} else {
-					for (int i = 0; i < player.getInventory().items.size(); ++i) {
-						ItemStack itemstack = player.getInventory().items.get(i);
+					for (int i = 0; i < player.getInventory().getNonEquipmentItems().size(); ++i) {
+						ItemStack itemstack = player.getInventory().getNonEquipmentItems().get(i);
 						if (!itemstack.isEmpty() && itemstack.getItem() == item.get()) {
 							itemstack.shrink(1);
 							break;

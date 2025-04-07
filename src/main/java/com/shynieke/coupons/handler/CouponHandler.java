@@ -121,9 +121,9 @@ public class CouponHandler {
 		if (event.getContainer() instanceof MerchantMenu container && InventoryCheck.hasCoupon(player, CouponRegistry.TRADING_COUPON)) {
 			CompoundTag tag = player.getPersistentData();
 			if (tag.contains(Reference.offerSlotTag) && tag.contains(Reference.offerUsesTag) && tag.contains(Reference.offerSpecialPrice)) {
-				int offerSlot = tag.getInt(Reference.offerSlotTag);
-				int previousUses = tag.getInt(Reference.offerUsesTag);
-				int specialPrice = tag.getInt(Reference.offerSpecialPrice);
+				int offerSlot = tag.getIntOr(Reference.offerSlotTag, 0);
+				int previousUses = tag.getIntOr(Reference.offerUsesTag, 0);
+				int specialPrice = tag.getIntOr(Reference.offerSpecialPrice, 0);
 				tag.remove(Reference.offerSlotTag);
 				tag.remove(Reference.offerUsesTag);
 				tag.remove(Reference.offerSpecialPrice);

@@ -5,11 +5,12 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.FuelValues;
 
 import javax.annotation.Nullable;
-import java.util.List;
+import java.util.function.Consumer;
 
 public class FurnaceCouponItem extends CouponItem {
 	public FurnaceCouponItem(Properties properties) {
@@ -21,9 +22,7 @@ public class FurnaceCouponItem extends CouponItem {
 		return 200;
 	}
 
-	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
-		tooltip.add(Component.translatable(Reference.MOD_ID + ":furnace_coupon_text").withStyle(ChatFormatting.GOLD));
-		super.appendHoverText(stack, context, tooltip, flagIn);
+	public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> consumer, TooltipFlag flag) {
+		consumer.accept(Component.translatable(Reference.MOD_ID + ":furnace_coupon_text").withStyle(ChatFormatting.GOLD));
 	}
 }

@@ -49,7 +49,7 @@ public class ClientHandler {
 			poseStack.mulPose(Axis.YP.rotationDegrees(angle));
 			ItemStackRenderState stackState = renderState.getRenderDataOrDefault(COUPON_RENDER_STATE, new ItemStackRenderState());
 			mc.getItemModelResolver()
-					.updateForTopItem(stackState, stack, ItemDisplayContext.GUI, false, null, null, 0);
+					.updateForTopItem(stackState, stack, ItemDisplayContext.GUI, null, null, 0);
 
 			stackState.render(poseStack, event.getMultiBufferSource(), event.getPackedLight(), OverlayTexture.NO_OVERLAY);
 			poseStack.popPose();
