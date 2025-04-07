@@ -33,7 +33,7 @@ public class CouponConfig {
 
 			entityBlacklist = builder
 					.comment("A list of entities that can't have loot doubled [Syntax: 'minecraft:bat']")
-					.defineListAllowEmpty(Collections.singletonList("entityBlacklist"), () -> Collections.singletonList(""), o -> (o instanceof String));
+					.defineListAllowEmpty("entityBlacklist", List::of, String::new, o -> (o instanceof String));
 
 			builder.pop();
 			builder.comment("Wandering Trader Trades")
