@@ -1,7 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "coupons:item/brewing_coupon_overlay",
-        "layer1": "coupons:item/brewing_coupon"
-    }
-}

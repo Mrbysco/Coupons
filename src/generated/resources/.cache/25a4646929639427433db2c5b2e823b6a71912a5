@@ -1,0 +1,7 @@
+// 1.21.1	2025-04-07T23:09:19.7119894	Item Models: coupons
+c757f3d154877c43d5f42c854864ad758d909cf6 assets/coupons/models/item/brewing_coupon.json
+bf75931c29b3c331aa0ea51d301e4139d0857fd2 assets/coupons/models/item/crafting_coupon.json
+fd104f8c9c5cbae51ec5547dcb17e7a5229d6f9c assets/coupons/models/item/experience_coupon.json
+0287a0e90c39166e0dfef4cf93b65dc579a57c85 assets/coupons/models/item/furnace_coupon.json
+2618117809dd07b6d1b7a75d996564349c6bac3b assets/coupons/models/item/loot_coupon.json
+20c685e2cdc321b13deda605926c335678d4acff assets/coupons/models/item/trading_coupon.json
