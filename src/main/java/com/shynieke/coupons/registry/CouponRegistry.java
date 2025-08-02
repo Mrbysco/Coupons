@@ -34,7 +34,7 @@ public class CouponRegistry {
 	public static final DeferredItem<TradingCouponItem> TRADING_COUPON = ITEMS.registerItem("trading_coupon", (properties) -> new TradingCouponItem(properties.rarity(Rarity.RARE)));
 
 	public static final Supplier<AttachmentType<Boolean>> DOUBLE_LOOT = ATTACHMENT_TYPES.register(
-			"double_loot", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).build());
+			"double_loot", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("value")).build());
 
 	public static final Supplier<CreativeModeTab> COUPON_TAB = CREATIVE_MODE_TABS.register("tab", () -> CreativeModeTab.builder()
 			.icon(() -> new ItemStack(CouponRegistry.CRAFTING_COUPON.get()))

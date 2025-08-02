@@ -15,12 +15,12 @@ You get discount and you get discount. EVERYBODY GETS DISCOUNT!
 [[dependencies.coupons]]
 modId="minecraft"
 type="REQUIRED"
-versionRange="[1.21.4,1.22)"
+versionRange="[1.21.7,1.22)"
 ordering="NONE"
 side="BOTH"
 [[dependencies.coupons]]
 modId="neoforge"
 type="REQUIRED"
-versionRange="[21.4.0-beta,)"
+versionRange="[21.7.0-beta,)"
 ordering="NONE"
 side="BOTH"
