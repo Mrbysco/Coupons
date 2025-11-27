@@ -24,7 +24,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerContainerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent.ItemCraftedEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.fluids.FluidUtil;
+import net.neoforged.neoforge.transfer.access.ItemAccess;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,8 +44,10 @@ public class CouponHandler {
 			for (int i = 0; i < inventory.getContainerSize(); i++) {
 				ItemStack foundStack = inventory.getItem(i);
 				if (!foundStack.isEmpty() && !foundStack.isDamageableItem() &&
-						foundStack.getCraftingRemainder().isEmpty() && !FluidUtil.getFluidHandler(foundStack).isPresent() &&
-						!hasEnergy(foundStack) && foundStack.getRarity() == Rarity.COMMON) {
+						foundStack.getCraftingRemainder().isEmpty() &&
+						!hasEnergy(foundStack) &&
+						foundStack.getCapability(Capabilities.Fluid.ITEM, null) == null &&
+						foundStack.getRarity() == Rarity.COMMON) {
 					refundStack = foundStack.copy();
 					refundStack.setCount(1);
 					break;
@@ -59,7 +61,7 @@ public class CouponHandler {
 	}
 
 	public static boolean hasEnergy(ItemStack itemStack) {
-		return itemStack.getCapability(Capabilities.EnergyStorage.ITEM) != null;
+		return itemStack.getCapability(Capabilities.Energy.ITEM, null) != null;
 	}
 
 	@SubscribeEvent

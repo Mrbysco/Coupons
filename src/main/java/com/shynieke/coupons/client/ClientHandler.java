@@ -6,6 +6,7 @@ import com.mojang.math.Axis;
 import com.shynieke.coupons.Reference;
 import com.shynieke.coupons.registry.CouponRegistry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
@@ -36,6 +37,7 @@ public class ClientHandler {
 
 	public static void nameplateEvent(RenderLivingEvent.Pre<?, ?, ?> event) {
 		LivingEntityRenderState renderState = event.getRenderState();
+		SubmitNodeCollector collector = event.getSubmitNodeCollector();
 		PoseStack poseStack = event.getPoseStack();
 		boolean doubleLoot = renderState.getRenderDataOrDefault(DOUBLE_LOOT, false);
 		if (doubleLoot) {
@@ -51,7 +53,8 @@ public class ClientHandler {
 			mc.getItemModelResolver()
 					.updateForTopItem(stackState, stack, ItemDisplayContext.GUI, null, null, 0);
 
-			stackState.render(poseStack, event.getMultiBufferSource(), event.getPackedLight(), OverlayTexture.NO_OVERLAY);
+
+			stackState.submit(poseStack, collector, renderState.lightCoords, OverlayTexture.NO_OVERLAY, renderState.outlineColor);
 			poseStack.popPose();
 		}
 	}
