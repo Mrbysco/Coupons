@@ -2,9 +2,10 @@ package com.shynieke.coupons.handler;
 
 import com.shynieke.coupons.config.CouponConfig;
 import com.shynieke.coupons.registry.CouponRegistry;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
+import net.minecraft.world.entity.npc.villager.VillagerTrades.ItemListing;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.village.WandererTradesEvent;
+import org.jspecify.annotations.Nullable;
 
 import java.util.OptionalInt;
 import java.util.Random;
@@ -71,7 +73,8 @@ public class TraderHandler {
 			this.priceMultiplier = priceMultiplier;
 		}
 
-		public MerchantOffer getOffer(Entity trader, RandomSource rand) {
+		@Override
+		public @Nullable MerchantOffer getOffer(ServerLevel serverLevel, Entity entity, RandomSource randomSource) {
 			return new MerchantOffer(new ItemCost(Items.EMERALD, this.priceAmount),
 					new ItemStack(this.outputStack.getItem(), this.outputAmount),
 					this.maxUses, this.givenExp, this.priceMultiplier);

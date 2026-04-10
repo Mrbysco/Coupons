@@ -6,13 +6,13 @@ import com.shynieke.coupons.registry.CouponRegistry;
 import com.shynieke.coupons.util.InventoryCheck;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.npc.WanderingTrader;
+import net.minecraft.world.entity.npc.wanderingtrader.WanderingTrader;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MerchantMenu;
 import net.minecraft.world.item.ItemStack;
@@ -36,7 +36,7 @@ public class CouponHandler {
 	public void onCrafting(ItemCraftedEvent event) {
 		Player player = event.getEntity();
 		ItemStack result = event.getCrafting();
-		ResourceLocation location = BuiltInRegistries.ITEM.getKey(result.getItem());
+		Identifier location = BuiltInRegistries.ITEM.getKey(result.getItem());
 		if (location != null && !location.getNamespace().equalsIgnoreCase(Reference.MOD_ID) &&
 				InventoryCheck.hasCoupon(player, CouponRegistry.CRAFTING_COUPON)) {
 			Container inventory = event.getInventory();
@@ -72,7 +72,7 @@ public class CouponHandler {
 
 		if (stack.getItem() == CouponRegistry.LOOT_COUPON.get() && !target.getData(CouponRegistry.DOUBLE_LOOT) && target instanceof LivingEntity) {
 			List<? extends String> blacklist = CouponConfig.COMMON.entityBlacklist.get();
-			ResourceLocation location = BuiltInRegistries.ENTITY_TYPE.getKey(target.getType());
+			Identifier location = BuiltInRegistries.ENTITY_TYPE.getKey(target.getType());
 			if ((!blacklist.isEmpty() && location != null && !blacklist.contains(location.toString())) ||
 					(CouponConfig.COMMON.doubleBossLoot.get())) {
 				target.setData(CouponRegistry.DOUBLE_LOOT, true);

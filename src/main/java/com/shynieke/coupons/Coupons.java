@@ -1,7 +1,6 @@
 package com.shynieke.coupons;
 
 import com.mojang.logging.LogUtils;
-import com.shynieke.coupons.client.ClientHandler;
 import com.shynieke.coupons.config.CouponConfig;
 import com.shynieke.coupons.handler.CouponHandler;
 import com.shynieke.coupons.handler.TraderHandler;
@@ -32,8 +31,6 @@ public class Coupons {
 
 		if (dist.isClient()) {
 			container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
-			eventBus.addListener(ClientHandler::registerCustomRenderData);
-			NeoForge.EVENT_BUS.addListener(ClientHandler::nameplateEvent);
 		}
 	}
 }

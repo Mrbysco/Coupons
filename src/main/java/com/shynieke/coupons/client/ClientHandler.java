@@ -11,20 +11,25 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 
+@EventBusSubscriber(Dist.CLIENT)
 public class ClientHandler {
 	public static final ContextKey<Boolean> DOUBLE_LOOT = new ContextKey<>(
-			ResourceLocation.fromNamespaceAndPath(Reference.MOD_ID, "double_loot"));
+			Reference.modLoc("double_loot"));
 	public static final ContextKey<ItemStackRenderState> COUPON_RENDER_STATE = new ContextKey<>(
-			ResourceLocation.fromNamespaceAndPath(Reference.MOD_ID, "coupon_render_state"));
+			Reference.modLoc("coupon_render_state"));
 
+	@SubscribeEvent
 	public static void registerCustomRenderData(RegisterRenderStateModifiersEvent event) {
 		event.registerEntityModifier(new TypeToken<LivingEntityRenderer<?, ?, ?>>() {
 		}, (living, state) -> {
@@ -35,6 +40,7 @@ public class ClientHandler {
 		});
 	}
 
+	@SubscribeEvent
 	public static void nameplateEvent(RenderLivingEvent.Pre<?, ?, ?> event) {
 		LivingEntityRenderState renderState = event.getRenderState();
 		SubmitNodeCollector collector = event.getSubmitNodeCollector();

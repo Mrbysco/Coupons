@@ -8,7 +8,7 @@ import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +31,7 @@ public class CouponModelProvider extends ModelProvider {
 
 	public void generatePotionCoupon(ItemModelGenerators generators) {
 		Item item = CouponRegistry.BREWING_COUPON.get();
-		ResourceLocation resourcelocation = generators.generateLayeredItem(
+		Identifier resourcelocation = generators.generateLayeredItem(
 				item, ModelLocationUtils.decorateItemModelLocation("coupons:brewing_coupon_overlay"),
 				ModelLocationUtils.getModelLocation(item)
 		);
