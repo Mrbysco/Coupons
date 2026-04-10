@@ -3,7 +3,6 @@ package com.shynieke.coupons;
 import com.mojang.logging.LogUtils;
 import com.shynieke.coupons.config.CouponConfig;
 import com.shynieke.coupons.handler.CouponHandler;
-import com.shynieke.coupons.handler.TraderHandler;
 import com.shynieke.coupons.registry.CouponRegistry;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -27,7 +26,6 @@ public class Coupons {
 		CouponRegistry.ITEMS.register(eventBus);
 		CouponRegistry.CREATIVE_MODE_TABS.register(eventBus);
 		NeoForge.EVENT_BUS.register(new CouponHandler());
-		NeoForge.EVENT_BUS.register(new TraderHandler());
 
 		if (dist.isClient()) {
 			container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);

@@ -1,0 +1,10 @@
+{
+  "values": [
+    "coupons:wandering_trader/brewing_coupon",
+    "coupons:wandering_trader/crafting_coupon",
+    "coupons:wandering_trader/experience_coupon",
+    "coupons:wandering_trader/furnace_coupon",
+    "coupons:wandering_trader/loot_coupon",
+    "coupons:wandering_trader/trading_coupon"
+  ]
+}

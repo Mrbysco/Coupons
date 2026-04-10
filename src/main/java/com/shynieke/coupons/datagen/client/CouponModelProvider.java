@@ -7,6 +7,7 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
@@ -31,11 +32,11 @@ public class CouponModelProvider extends ModelProvider {
 
 	public void generatePotionCoupon(ItemModelGenerators generators) {
 		Item item = CouponRegistry.BREWING_COUPON.get();
-		Identifier resourcelocation = generators.generateLayeredItem(
-				item, ModelLocationUtils.decorateItemModelLocation("coupons:brewing_coupon_overlay"),
-				ModelLocationUtils.getModelLocation(item)
+		Identifier model = generators.generateLayeredItem(
+				item, new Material(ModelLocationUtils.decorateItemModelLocation("coupons:brewing_coupon_overlay")),
+				new Material(ModelLocationUtils.getModelLocation(item))
 		);
-		generators.addPotionTint(item, resourcelocation);
+		generators.addPotionTint(item, model);
 	}
 
 }

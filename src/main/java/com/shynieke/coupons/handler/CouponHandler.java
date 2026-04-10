@@ -44,7 +44,7 @@ public class CouponHandler {
 			for (int i = 0; i < inventory.getContainerSize(); i++) {
 				ItemStack foundStack = inventory.getItem(i);
 				if (!foundStack.isEmpty() && !foundStack.isDamageableItem() &&
-						foundStack.getCraftingRemainder().isEmpty() &&
+						foundStack.getCraftingRemainder() == null &&
 						!hasEnergy(foundStack) &&
 						foundStack.getCapability(Capabilities.Fluid.ITEM, null) == null &&
 						foundStack.getRarity() == Rarity.COMMON) {
