@@ -25,8 +25,7 @@ public class CouponDatagen {
 	@SubscribeEvent
 	public static void onGatherRegistries(GatherDataRegistryEntriesEvent event) {
 		event.gatherFor(Reference.MOD_ID)
-				.add(Registries.VILLAGER_TRADE, TraderHandler::bootstrap);
-		event.gatherFor(Reference.MOD_ID)
+				.add(Registries.VILLAGER_TRADE, TraderHandler::bootstrap)
 				.add(CouponRecipeProvider.create());
 	}
 }
