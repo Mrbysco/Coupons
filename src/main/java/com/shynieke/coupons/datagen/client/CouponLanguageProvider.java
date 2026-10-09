@@ -3,12 +3,13 @@ package com.shynieke.coupons.datagen.client;
 import com.shynieke.coupons.Reference;
 import com.shynieke.coupons.registry.CouponRegistry;
 import net.minecraft.data.PackOutput;
+import net.minecraft.locale.Language;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.jetbrains.annotations.Nullable;
 
 public class CouponLanguageProvider extends LanguageProvider {
 	public CouponLanguageProvider(PackOutput packOutput) {
-		super(packOutput, Reference.MOD_ID, "en_us");
+		super(packOutput, Reference.MOD_ID, Language.DEFAULT);
 	}
 
 	@Override

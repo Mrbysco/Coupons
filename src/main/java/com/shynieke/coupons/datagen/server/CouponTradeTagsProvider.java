@@ -1,5 +1,6 @@
 package com.shynieke.coupons.datagen.server;
 
+import com.shynieke.coupons.Reference;
 import com.shynieke.coupons.handler.TraderHandler;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -10,7 +11,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class CouponTradeTagsProvider extends VillagerTradesTagsProvider {
 	public CouponTradeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-		super(output, lookupProvider);
+		super(output, lookupProvider, Reference.MOD_ID);
 	}
 
 	@Override
