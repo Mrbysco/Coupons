@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.Identifier;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -54,7 +53,7 @@ public class ClientHandler {
 			poseStack.translate(0.0D, f, 0.0D);
 			poseStack.scale(0.3F, 0.3F, 0.3F);
 			float angle = renderState.bodyRot;
-			poseStack.mulPose(Axis.YP.rotationDegrees(angle));
+			poseStack.rotateDegrees(Axis.YP, angle);
 			ItemStackRenderState stackState = renderState.getRenderDataOrDefault(COUPON_RENDER_STATE, new ItemStackRenderState());
 			mc.getItemModelResolver()
 					.updateForTopItem(stackState, stack, ItemDisplayContext.GUI, null, null, 0);

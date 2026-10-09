@@ -19,7 +19,7 @@ public class Coupons {
 	public static final Logger LOGGER = LogUtils.getLogger();
 
 	public Coupons(IEventBus eventBus, Dist dist, ModContainer container) {
-		container.registerConfig(ModConfig.Type.COMMON, CouponConfig.commonSpec);
+		container.registerConfig(ModConfig.Type.LOCAL, CouponConfig.commonSpec);
 		eventBus.register(CouponConfig.class);
 
 		CouponRegistry.ATTACHMENT_TYPES.register(eventBus);
