@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:brewing",
+  "input": {
+    "item": "coupons:brewing_coupon"
+  },
+  "output": {
+    "components": {
+      "minecraft:potion_contents": {
+        "potion": "minecraft:awkward"
+      }
+    },
+    "id": "minecraft:potion"
+  },
+  "reagent": {
+    "item": "minecraft:nether_wart"
+  }
+}
