@@ -1,4 +1,4 @@
-package com.shynieke.coupons.datagen;
+package com.shynieke.coupons.datagen.server;
 
 import com.shynieke.coupons.Reference;
 import com.shynieke.coupons.registry.CouponRegistry;

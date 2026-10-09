@@ -3,6 +3,7 @@ package com.shynieke.coupons.datagen;
 import com.shynieke.coupons.Reference;
 import com.shynieke.coupons.datagen.client.CouponLanguageProvider;
 import com.shynieke.coupons.datagen.client.CouponModelProvider;
+import com.shynieke.coupons.datagen.server.CouponRecipeProvider;
 import com.shynieke.coupons.datagen.server.CouponTradeTagsProvider;
 import com.shynieke.coupons.handler.TraderHandler;
 import net.minecraft.core.registries.Registries;
