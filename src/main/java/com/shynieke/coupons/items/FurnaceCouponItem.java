@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 
 public class FurnaceCouponItem extends CouponItem {
 	public FurnaceCouponItem(Properties properties) {
-		super(properties.component(DataComponents.COOKING_FUEL,new CookingFuel(new ResolvableInt.Constant(200),new ResolvableFloat.Constant(1.0F))));
+		super(properties.component(DataComponents.COOKING_FUEL, new CookingFuel(new ResolvableInt.Constant(200), new ResolvableFloat.Constant(1.0F))));
 	}
 
 

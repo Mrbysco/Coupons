@@ -53,7 +53,7 @@ public class ClientHandler {
 			poseStack.translate(0.0D, f, 0.0D);
 			poseStack.scale(0.3F, 0.3F, 0.3F);
 			float angle = renderState.bodyRot;
-			poseStack.rotateDegrees(Axis.YP,angle);
+			poseStack.rotateDegrees(Axis.YP, angle);
 			ItemStackRenderState stackState = renderState.getRenderDataOrDefault(COUPON_RENDER_STATE, new ItemStackRenderState());
 			mc.getItemModelResolver()
 					.updateForTopItem(stackState, stack, ItemDisplayContext.GUI, null, null, 0);

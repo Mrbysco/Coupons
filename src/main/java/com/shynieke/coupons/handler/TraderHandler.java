@@ -24,27 +24,27 @@ public class TraderHandler {
 	public static Holder<VillagerTrade> bootstrap(BootstrapContext<VillagerTrade> context) {
 		context.register(WANDERING_TRADER_EMERALD_COUPON, new VillagerTrade.Builder(
 				new TradeCost(Items.EMERALD, 3), new ItemStackTemplate(CouponRegistry.BREWING_COUPON.get(), 1),
-				ContextIntProviders.exactly(12), ContextIntProviders.exactly( 30), ContextFloatProviders.exactly(.05F)).build());
+				ContextIntProviders.exactly(12), ContextIntProviders.exactly(30), ContextFloatProviders.exactly(.05F)).build());
 
 		context.register(WANDERING_TRADER_CRAFTING_COUPON, new VillagerTrade.Builder(
 				new TradeCost(Items.EMERALD, 3), new ItemStackTemplate(CouponRegistry.CRAFTING_COUPON.get(), 1),
-				ContextIntProviders.exactly(12), ContextIntProviders.exactly( 30), ContextFloatProviders.exactly(.05F)).build());
+				ContextIntProviders.exactly(12), ContextIntProviders.exactly(30), ContextFloatProviders.exactly(.05F)).build());
 
 		context.register(WANDERING_TRADER_EXPERIENCE_COUPON, new VillagerTrade.Builder(
 				new TradeCost(Items.EMERALD, 3), new ItemStackTemplate(CouponRegistry.EXPERIENCE_COUPON.get(), 1),
-				ContextIntProviders.exactly(12), ContextIntProviders.exactly( 30), ContextFloatProviders.exactly(.05F)).build());
+				ContextIntProviders.exactly(12), ContextIntProviders.exactly(30), ContextFloatProviders.exactly(.05F)).build());
 
 		context.register(WANDERING_TRADER_FURNACE_COUPON, new VillagerTrade.Builder(
 				new TradeCost(Items.EMERALD, 3), new ItemStackTemplate(CouponRegistry.FURNACE_COUPON.get(), 1),
-				ContextIntProviders.exactly(12), ContextIntProviders.exactly( 30), ContextFloatProviders.exactly(.05F)).build());
+				ContextIntProviders.exactly(12), ContextIntProviders.exactly(30), ContextFloatProviders.exactly(.05F)).build());
 
 		context.register(WANDERING_TRADER_LOOT_COUPON, new VillagerTrade.Builder(
 				new TradeCost(Items.EMERALD, 3), new ItemStackTemplate(CouponRegistry.LOOT_COUPON.get(), 1),
-				ContextIntProviders.exactly(12), ContextIntProviders.exactly( 30), ContextFloatProviders.exactly(.05F)).build());
+				ContextIntProviders.exactly(12), ContextIntProviders.exactly(30), ContextFloatProviders.exactly(.05F)).build());
 
 		return context.register(WANDERING_TRADER_TRADING_COUPON, new VillagerTrade.Builder(
 				new TradeCost(Items.EMERALD, 3), new ItemStackTemplate(CouponRegistry.TRADING_COUPON.get(), 1),
-				ContextIntProviders.exactly(12), ContextIntProviders.exactly( 30), ContextFloatProviders.exactly(.05F)).build());
+				ContextIntProviders.exactly(12), ContextIntProviders.exactly(30), ContextFloatProviders.exactly(.05F)).build());
 	}
 
 	public static ResourceKey<VillagerTrade> resourceKey(String path) {
