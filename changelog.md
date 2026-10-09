@@ -1,1 +1,1 @@
-* Initial update to 26.1.2
+* Initial update to 26.2 (Courtesy of [JaaiDead](https://github.com/Mrbysco/Coupons/pull/3))
